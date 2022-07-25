@@ -42,22 +42,6 @@ export const partners = () => {
                     window.location.href = '/restaurant.html';
                 } else {
                     const modalAuth = document.querySelector('.modal-auth');
-                    const logInForm = document.getElementById('logInForm');
-
-                    logInForm.addEventListener('submit', (e) => {
-                        e.preventDefault();
-                        if (inputLogin.value && inputPassword.value) {
-                            const user = {
-                                login: inputLogin.value,
-                                password: inputPassword.value,
-                            };
-
-                            localStorage.setItem('user', JSON.stringify(user));
-                            login(user);
-                        } else {
-                            alert('Пожалуйста, заполните все поля в форме!');
-                        }
-                    });
 
                     modalAuth.style.display = 'flex';
                 }
