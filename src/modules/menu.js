@@ -1,18 +1,36 @@
 export const menu = () => {
     const cardsMenu = document.querySelector('.cards-menu');
 
+    const cartArray = localStorage.getItem('cart')
+        ? JSON.parse(localStorage.getItem('cart'))
+        : [];
+
     const changeTitle = (restaurant) => {
         const restaurantTitle = document.querySelector('.restaurant-title');
         const restaurantRating = document.querySelector('.rating');
         const restaurantPrice = document.querySelector('.price');
         const restaurantCategory = document.querySelector('.category');
 
-        console.log(restaurant);
-
         restaurantTitle.textContent = restaurant.name;
         restaurantRating.textContent = restaurant.stars;
         restaurantPrice.textContent = `От ${restaurant.price} ₽`;
         restaurantCategory.textContent = restaurant.kitchen;
+    };
+
+    const addToCart = (cartItem) => {
+        if (cartArray.some((item) => item.id === cartItem.id)) {
+            cartArray.map((item) => {
+                if (item.id === cartItem.id) {
+                    item.count++;
+                }
+
+                return item;
+            });
+        } else {
+            cartArray.push(cartItem);
+        }
+
+        localStorage.setItem('cart', JSON.stringify(cartArray));
     };
 
     const renderItems = (data) => {
@@ -43,6 +61,18 @@ export const menu = () => {
                     </div>
                 </div>
             `;
+
+            card.querySelector('.button-card-text').addEventListener(
+                'click',
+                () => {
+                    addToCart({
+                        name,
+                        price,
+                        id,
+                        count: 1,
+                    });
+                }
+            );
 
             cardsMenu.append(card);
         });

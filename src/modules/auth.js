@@ -7,6 +7,7 @@ export const auth = () => {
     const inputPassword = document.getElementById('password');
     const buttonOut = document.querySelector('.button-out');
     const userName = document.querySelector('.user-name');
+    const buttonCart = document.querySelector('.button-cart');
 
     const login = (user) => {
         buttonAuth.style.display = 'none';
@@ -14,6 +15,8 @@ export const auth = () => {
         userName.style.display = 'flex';
         userName.textContent = user.login;
         modalAuth.style.display = 'none';
+
+        buttonCart.style.display = 'flex';
     };
     const logout = () => {
         buttonAuth.style.display = 'flex';
@@ -21,6 +24,8 @@ export const auth = () => {
         userName.style.display = 'none';
         userName.textContent = '';
         localStorage.removeItem('user');
+
+        buttonCart.style.display = 'none';
     };
 
     buttonAuth.addEventListener('click', () => {
